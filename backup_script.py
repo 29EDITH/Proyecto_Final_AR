@@ -12,16 +12,12 @@ from pygit2 import Keypair, RemoteCallbacks, UserPass, Repository, Signature
 nr = InitNornir(config_file= "config.yaml" )
 GITHUB_REPO_PATH = "/root/Automatizacion/ELFINAI/Proyecto_Final_AR"
 
-# Crear el directorio
-#backup_dir = "backups"
-#os.makedirs(backup_dir, exist_ok=True)
 # Crear el directorio dentro del repositorio local de GitHub
 repo_path = "/root/Automatizacion/ELFINAI/Proyecto_Final_AR"
 backup_dir = os.path.join(repo_path, "backups")  # Ruta completa al directorio de backups
 os.makedirs(backup_dir, exist_ok=True)
 
 def backup_configurations(task):
-    #print(nr.inventory.hosts)
     # Conectar y obtener la configuración
     task.run(task=netmiko_send_command, command_string="enable", enable=True)
     result = task.run(task=napalm_get, getters=["config"])
